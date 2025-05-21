@@ -6,6 +6,16 @@ import { Button } from "@/components/ui/button";
 const GameOverScreen: React.FC = () => {
   const { score, restartGame, startGame } = useGameContext();
 
+  const handleTryAgain = () => {
+    console.log("Try Again clicked, calling restartGame directly");
+    restartGame();
+  };
+
+  const handleNewStory = () => {
+    console.log("Restart with New Story clicked, calling startGame directly");
+    startGame();
+  };
+
   return (
     <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
@@ -21,20 +31,14 @@ const GameOverScreen: React.FC = () => {
         
         <div className="space-y-3">
           <Button 
-            onClick={() => {
-              console.log("Try Again clicked, calling restartGame");
-              restartGame();
-            }}
+            onClick={handleTryAgain}
             className="w-full bg-black hover:bg-gray-800 text-white"
           >
             Try Again
           </Button>
           
           <Button 
-            onClick={() => {
-              console.log("Restart with New Story clicked, calling startGame");
-              startGame();
-            }}
+            onClick={handleNewStory}
             variant="outline"
             className="w-full"
           >

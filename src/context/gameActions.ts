@@ -15,6 +15,7 @@ export function useGameActions() {
     initialPlatforms: any[],
     initialEnemies: any[]
   ) => {
+    console.log("Starting game with new state...");
     setGameState("playing");
     setPlayer({ ...defaultPlayer });
     setPlatforms([...initialPlatforms]);
@@ -32,6 +33,7 @@ export function useGameActions() {
     setGameLoop: (id: number | null) => void
   ) => {
     if (gameState === "playing") {
+      console.log("Pausing game...");
       setGameState("paused");
       if (gameLoop) {
         cancelAnimationFrame(gameLoop);
@@ -45,6 +47,7 @@ export function useGameActions() {
     setGameState: (state: GameState) => void
   ) => {
     if (gameState === "paused") {
+      console.log("Resuming game...");
       setGameState("playing");
     }
   };
@@ -53,9 +56,9 @@ export function useGameActions() {
     gameState: GameState,
     startGameFn: () => void
   ) => {
-    if (gameState === "gameover") {
-      startGameFn();
-    }
+    console.log("Restarting game from gameState:", gameState);
+    // Call startGame regardless of current gameState to ensure restart works from any state
+    startGameFn();
   };
 
   const movePlayer = (

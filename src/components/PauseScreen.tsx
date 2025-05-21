@@ -6,6 +6,16 @@ import { Button } from "@/components/ui/button";
 const PauseScreen: React.FC = () => {
   const { resumeGame, startGame } = useGameContext();
 
+  const handleResume = () => {
+    console.log("Resume Game clicked, calling resumeGame directly");
+    resumeGame();
+  };
+
+  const handleRestart = () => {
+    console.log("Restart Game clicked, calling startGame directly");
+    startGame();
+  };
+
   return (
     <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
@@ -17,20 +27,14 @@ const PauseScreen: React.FC = () => {
         
         <div className="space-y-3">
           <Button 
-            onClick={() => {
-              console.log("Resume Game clicked");
-              resumeGame();
-            }}
+            onClick={handleResume}
             className="w-full bg-black hover:bg-gray-800 text-white"
           >
             Resume Game
           </Button>
           
           <Button 
-            onClick={() => {
-              console.log("Restart Game clicked");
-              startGame();
-            }}
+            onClick={handleRestart}
             variant="outline"
             className="w-full"
           >

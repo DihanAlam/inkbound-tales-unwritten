@@ -25,6 +25,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const actions = useGameActions();
 
   const startGame = () => {
+    console.log("startGame function called");
     actions.startGame(
       setGameState,
       setPlayer,
@@ -40,15 +41,19 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const pauseGame = () => {
+    console.log("pauseGame function called");
     actions.pauseGame(gameState, setGameState, gameLoop, setGameLoop);
   };
 
   const resumeGame = () => {
+    console.log("resumeGame function called");
     actions.resumeGame(gameState, setGameState);
   };
 
   const restartGame = () => {
-    actions.restartGame(gameState, startGame);
+    console.log("restartGame function called in GameContext");
+    // Directly call startGame to restart from any state
+    startGame();
   };
 
   const movePlayer = (direction: "left" | "right" | "up" | "none") => {
