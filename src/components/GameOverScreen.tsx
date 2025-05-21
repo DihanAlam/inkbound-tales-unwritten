@@ -21,14 +21,20 @@ const GameOverScreen: React.FC = () => {
         
         <div className="space-y-3">
           <Button 
-            onClick={restartGame}
+            onClick={() => {
+              console.log("Try Again clicked, calling restartGame");
+              restartGame();
+            }}
             className="w-full bg-black hover:bg-gray-800 text-white"
           >
             Try Again
           </Button>
           
           <Button 
-            onClick={startGame}
+            onClick={() => {
+              console.log("Restart with New Story clicked, calling startGame");
+              startGame();
+            }}
             variant="outline"
             className="w-full"
           >

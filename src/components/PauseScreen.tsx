@@ -17,14 +17,20 @@ const PauseScreen: React.FC = () => {
         
         <div className="space-y-3">
           <Button 
-            onClick={resumeGame}
+            onClick={() => {
+              console.log("Resume Game clicked");
+              resumeGame();
+            }}
             className="w-full bg-black hover:bg-gray-800 text-white"
           >
             Resume Game
           </Button>
           
           <Button 
-            onClick={startGame}
+            onClick={() => {
+              console.log("Restart Game clicked");
+              startGame();
+            }}
             variant="outline"
             className="w-full"
           >
