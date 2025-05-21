@@ -4,8 +4,9 @@ import { GameState, PageType, Player, Enemy, Platform, GameContextType } from ".
 import { defaultPlayer, initialPlatforms, initialEnemies } from "./initialState";
 import { useGameActions } from "./gameActions";
 
-export { GameState, PageType } from "./types";
+// Export types properly with 'export type' syntax
 export type { Position, Player, Enemy, Platform } from "./types";
+export type { GameState, PageType } from "./types";
 
 export const GameContext = createContext<GameContextType | undefined>(undefined);
 
