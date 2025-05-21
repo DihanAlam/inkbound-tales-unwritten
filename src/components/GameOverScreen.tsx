@@ -8,11 +8,13 @@ const GameOverScreen: React.FC = () => {
 
   const handleTryAgain = () => {
     console.log("Try Again clicked, calling restartGame directly");
+    // Force a state reset before restarting
     restartGame();
   };
 
   const handleNewStory = () => {
     console.log("Restart with New Story clicked, calling startGame directly");
+    // Force a state reset before starting a new game
     startGame();
   };
 

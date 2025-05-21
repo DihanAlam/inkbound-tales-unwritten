@@ -26,6 +26,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const startGame = () => {
     console.log("startGame function called");
+    // Cancel any existing game loop
+    if (gameLoop) {
+      cancelAnimationFrame(gameLoop);
+      setGameLoop(null);
+    }
+    
     actions.startGame(
       setGameState,
       setPlayer,
@@ -52,8 +58,19 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const restartGame = () => {
     console.log("restartGame function called in GameContext");
-    // Directly call startGame to restart from any state
-    startGame();
+    // Force reset all state variables before starting the game
+    setGameState("start");
+    setPlayer({ ...defaultPlayer });
+    setPlatforms([...initialPlatforms]);
+    setEnemies([...initialEnemies]);
+    setRestoredAreas([]);
+    setScore(0);
+    setTimeState(0);
+    
+    // Add a slight delay before starting the game to ensure state updates
+    setTimeout(() => {
+      startGame();
+    }, 50);
   };
 
   const movePlayer = (direction: "left" | "right" | "up" | "none") => {

@@ -16,6 +16,7 @@ export function useGameActions() {
     initialEnemies: any[]
   ) => {
     console.log("Starting game with new state...");
+    // Force state reset
     setGameState("playing");
     setPlayer({ ...defaultPlayer });
     setPlatforms([...initialPlatforms]);

@@ -13,6 +13,7 @@ const PauseScreen: React.FC = () => {
 
   const handleRestart = () => {
     console.log("Restart Game clicked, calling startGame directly");
+    // Force a state reset before starting a new game
     startGame();
   };
 
