@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,157 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-hidden;
+  }
+}
+
+@layer components {
+  .ink-splash {
+    position: absolute;
+    border-radius: 50%;
+    background: black;
+    animation: splash 0.6s ease-out forwards;
+    pointer-events: none;
+  }
+  
+  .ink-flow {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ink-flow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.05) 100%);
+    animation: ripple 2s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .page {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23ffffff'/%3E%3Cpath d='M0 10h100M0 20h100M0 30h100M0 40h100M0 50h100M0 60h100M0 70h100M0 80h100M0 90h100' stroke='%23f0f0f0' stroke-width='1'/%3E%3C/svg%3E");
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-fantasy {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+      url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23ffffff'/%3E%3Cpath d='M0 10c30 0 30 10 60 10s30-10 60-10M0 30c30 0 30 10 60 10s30-10 60-10M0 50c30 0 30 10 60 10s30-10 60-10M0 70c30 0 30 10 60 10s30-10 60-10M0 90c30 0 30 10 60 10s30-10 60-10' stroke='%23f0f0f0' stroke-width='1'/%3E%3C/svg%3E");
+  }
+
+  .platform {
+    @apply bg-inkblack rounded-md;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .crack {
+    @apply bg-gray-200 rounded-md;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .crack::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 49.5%, #e0e0e0 49.5%, #e0e0e0 50.5%, transparent 50.5%);
+    background-size: 10px 10px;
+  }
+
+  .enemy {
+    @apply bg-inkblack rounded-full animate-pulse-ink;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .enemy-corrupted {
+    clip-path: polygon(
+      20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%
+    );
+  }
+
+  .inkblot {
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 50% 60% 50% 40% / 40% 50% 60% 50%;
+    position: relative;
+    transform-origin: center center;
+    animation: pulse-ink 2s ease-in-out infinite alternate;
+  }
+
+  .inkblot::before, .inkblot::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    animation: flow-ink 3s ease-in-out infinite alternate;
+  }
+
+  .inkblot::before {
+    width: 15px;
+    height: 15px;
+    top: -5px;
+    left: 5px;
+    animation-delay: 0.2s;
+  }
+
+  .inkblot::after {
+    width: 10px;
+    height: 10px;
+    bottom: -2px;
+    right: 5px;
+    animation-delay: 0.5s;
+  }
+
+  .restored {
+    position: relative;
+  }
+
+  .restored::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0), rgba(30, 58, 138, 0.1));
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  .title-ink {
+    position: relative;
+    display: inline-block;
+  }
+
+  .title-ink::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #1E3A8A, transparent);
+    animation: flow-ink 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .float-animation {
+    animation: float 4s ease-in-out infinite;
   }
 }

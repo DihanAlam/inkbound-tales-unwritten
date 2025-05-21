@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,13 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				inkblack: '#000000',
+				inkwhite: '#FFFFFF',
+				restored: {
+					blue: '#1E3A8A',
+					purple: '#7E22CE',
+					red: '#B91C1C'
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -84,11 +92,32 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-ink': {
+					'0%, 100%': { transform: 'scale(1)', opacity: '1' },
+					'50%': { transform: 'scale(1.05)', opacity: '0.9' }
+				},
+				'flow-ink': {
+					'0%': { transform: 'translateY(0) rotate(0deg)', opacity: '0.8' },
+					'50%': { transform: 'translateY(-5px) rotate(3deg)', opacity: '1' },
+					'100%': { transform: 'translateY(0) rotate(0deg)', opacity: '0.8' }
+				},
+				'splash': {
+					'0%': { transform: 'scale(0)', opacity: '1' },
+					'100%': { transform: 'scale(1)', opacity: '0' }
+				},
+				'ripple': {
+					'0%': { transform: 'scale(0.95)', opacity: '1' },
+					'100%': { transform: 'scale(1.05)', opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-ink': 'pulse-ink 2s ease-in-out infinite',
+				'flow-ink': 'flow-ink 3s ease-in-out infinite',
+				'splash': 'splash 0.6s ease-out forwards',
+				'ripple': 'ripple 1.5s ease-out infinite'
 			}
 		}
 	},
