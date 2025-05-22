@@ -53,13 +53,28 @@ export function useGameActions() {
     }
   };
 
+  // Modifying this function to directly use parameters instead of calling another function
   const restartGame = (
-    gameState: GameState,
-    startGameFn: () => void
+    setGameState: (state: GameState) => void,
+    setPlayer: (player: Player) => void,
+    setPlatforms: (platforms: any[]) => void,
+    setEnemies: (enemies: any[]) => void,
+    setRestoredAreas: (areas: string[]) => void,
+    setScore: (score: number) => void,
+    setTimeState: (time: number) => void,
+    defaultPlayer: Player,
+    initialPlatforms: any[],
+    initialEnemies: any[]
   ) => {
-    console.log("Restarting game from gameState:", gameState);
-    // Call startGame regardless of current gameState to ensure restart works from any state
-    startGameFn();
+    console.log("Restarting game with direct state reset...");
+    setGameState("playing");
+    setPlayer({ ...defaultPlayer });
+    setPlatforms([...initialPlatforms]);
+    setEnemies([...initialEnemies]);
+    setRestoredAreas([]);
+    setScore(0);
+    setTimeState(0);
+    toast("Game restarted! Good luck!");
   };
 
   const movePlayer = (

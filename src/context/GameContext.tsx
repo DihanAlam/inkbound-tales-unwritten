@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { GameState, PageType, Player, Enemy, Platform, GameContextType } from "./types";
 import { defaultPlayer, initialPlatforms, initialEnemies } from "./initialState";
@@ -58,19 +57,25 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const restartGame = () => {
     console.log("restartGame function called in GameContext");
-    // Force reset all state variables before starting the game
-    setGameState("start");
-    setPlayer({ ...defaultPlayer });
-    setPlatforms([...initialPlatforms]);
-    setEnemies([...initialEnemies]);
-    setRestoredAreas([]);
-    setScore(0);
-    setTimeState(0);
+    // Cancel any existing game loop
+    if (gameLoop) {
+      cancelAnimationFrame(gameLoop);
+      setGameLoop(null);
+    }
     
-    // Add a slight delay before starting the game to ensure state updates
-    setTimeout(() => {
-      startGame();
-    }, 50);
+    // Use the updated restartGame function directly
+    actions.restartGame(
+      setGameState,
+      setPlayer,
+      setPlatforms,
+      setEnemies,
+      setRestoredAreas,
+      setScore,
+      setTimeState,
+      defaultPlayer,
+      initialPlatforms,
+      initialEnemies
+    );
   };
 
   const movePlayer = (direction: "left" | "right" | "up" | "none") => {
