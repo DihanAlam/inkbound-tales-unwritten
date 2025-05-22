@@ -39,7 +39,8 @@ const GameLoop: React.FC<GameLoopProps> = ({
     const deltaTime = timestamp - lastTime.current;
     lastTime.current = timestamp;
     
-    // Handle player movement based on keys pressed - always check for left/right
+    // Handle horizontal movement based on keys pressed
+    // This happens on every frame update
     if (keysPressed.current.ArrowLeft || keysPressed.current.a) {
       movePlayer("left");
     } else if (keysPressed.current.ArrowRight || keysPressed.current.d) {
@@ -48,10 +49,8 @@ const GameLoop: React.FC<GameLoopProps> = ({
       movePlayer("none");
     }
     
-    // Handle jumping separately
-    if ((keysPressed.current.ArrowUp || keysPressed.current.w || keysPressed.current[" "]) && !player.isJumping) {
-      movePlayer("up");
-    }
+    // Jumping is handled in useGameInput.ts now, on initial key press
+    // This removes the need to check for jump condition here
     
     // Update player position with physics
     const newPlayer = updatePlayerPhysics(player, platforms, canvasSize);

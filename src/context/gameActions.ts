@@ -85,25 +85,41 @@ export function useGameActions() {
     if (gameState !== "playing") return;
 
     setPlayer((prev) => {
+      // Create a copy of the player state
       const newPlayer = { ...prev };
 
-      // Handle horizontal movement regardless of jumping state
+      // Handle movement based on direction
       switch (direction) {
         case "left":
-          newPlayer.velocity.x = -5;
+          // Handle left movement - maintain vertical velocity
+          newPlayer.velocity = {
+            x: -5,
+            y: newPlayer.velocity.y // Keep the current vertical velocity
+          };
           break;
         case "right":
-          newPlayer.velocity.x = 5;
+          // Handle right movement - maintain vertical velocity
+          newPlayer.velocity = {
+            x: 5,
+            y: newPlayer.velocity.y // Keep the current vertical velocity
+          };
           break;
         case "up":
+          // Only jump if not already jumping
           if (!newPlayer.isJumping) {
-            newPlayer.velocity.y = -15;
+            newPlayer.velocity = {
+              x: newPlayer.velocity.x, // Keep horizontal velocity
+              y: -15 // Apply jump velocity
+            };
             newPlayer.isJumping = true;
           }
           break;
         case "none":
-          // Only reset horizontal velocity, preserve vertical
-          newPlayer.velocity.x = 0;
+          // Stop horizontal movement but maintain vertical movement
+          newPlayer.velocity = {
+            x: 0,
+            y: newPlayer.velocity.y
+          };
           break;
       }
 
