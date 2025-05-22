@@ -87,6 +87,7 @@ export function useGameActions() {
     setPlayer((prev) => {
       const newPlayer = { ...prev };
 
+      // Handle horizontal movement regardless of jumping state
       switch (direction) {
         case "left":
           newPlayer.velocity.x = -5;
@@ -101,6 +102,7 @@ export function useGameActions() {
           }
           break;
         case "none":
+          // Only reset horizontal velocity, preserve vertical
           newPlayer.velocity.x = 0;
           break;
       }

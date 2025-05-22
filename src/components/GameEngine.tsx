@@ -213,7 +213,7 @@ const GameEngine: React.FC = () => {
     const deltaTime = timestamp - lastTime.current;
     lastTime.current = timestamp;
     
-    // Player movement based on keys pressed
+    // Handle player movement based on keys pressed - always check for left/right
     if (keysPressed.current.ArrowLeft || keysPressed.current.a) {
       movePlayer("left");
     } else if (keysPressed.current.ArrowRight || keysPressed.current.d) {
@@ -222,10 +222,8 @@ const GameEngine: React.FC = () => {
       movePlayer("none");
     }
     
-    if (
-      (keysPressed.current.ArrowUp || keysPressed.current.w || keysPressed.current[" "]) &&
-      !player.isJumping
-    ) {
+    // Handle jumping separately
+    if ((keysPressed.current.ArrowUp || keysPressed.current.w || keysPressed.current[" "]) && !player.isJumping) {
       movePlayer("up");
     }
     
@@ -354,7 +352,7 @@ const GameEngine: React.FC = () => {
       const ctx = canvas?.getContext("2d");
       
       if (ctx) {
-        // Return updated state
+        // Draw the current game state
         draw(ctx);
       }
     }
